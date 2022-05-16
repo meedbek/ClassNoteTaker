@@ -22,7 +22,7 @@ class Notes
     #[ORM\Column(type: 'datetime', nullable: true)]
     private $updated_at;
 
-    #[ORM\ManyToOne(targetEntity: modules::class, inversedBy: 'notes')]
+    #[ORM\ManyToOne(targetEntity: Modules::class, inversedBy: 'notes')]
     #[ORM\JoinColumn(nullable: false)]
     private $module;
 
