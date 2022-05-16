@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+date_default_timezone_set('Asia/Kolkata');
+
 #[Route('/notes')]
 class NotesController extends AbstractController
 {
@@ -25,7 +27,8 @@ class NotesController extends AbstractController
     public function new(Request $request, NotesRepository $notesRepository): Response
     {
         $note = new Notes();
-        $form = $this->createForm(NotesType::class, $note);
+        $form = $this->createForm(NotesType::class, $note); 
+        $note->setCreatedAt(new \DateTime('now'));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -53,6 +56,7 @@ class NotesController extends AbstractController
     {
         $form = $this->createForm(NotesType::class, $note);
         $form->handleRequest($request);
+        $note->setUpdatedAt(new \DateTime('now'));
 
         if ($form->isSubmitted() && $form->isValid()) {
             $notesRepository->add($note, true);
