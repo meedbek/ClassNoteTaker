@@ -9,15 +9,26 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 #[Route('/modules')]
 class ModulesController extends AbstractController
 {
+    /**
+     * @var Security
+     */
+    private $security;
+
+    public function __construct(Security $security)
+    {
+       $this->security = $security;
+    }
+
     #[Route('/', name: 'app_modules_index', methods: ['GET'])]
     public function index(ModulesRepository $modulesRepository): Response
     {
         return $this->render('modules/index.html.twig', [
-            'modules' => $modulesRepository->findAll(),
+            'modules' => $this->security->getUser()->getModules(),
         ]);
     }
 
@@ -26,6 +37,7 @@ class ModulesController extends AbstractController
     {
         $module = new Modules();
         $form = $this->createForm(ModulesType::class, $module);
+        $module->setUser($this->security->getUser());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -52,6 +64,7 @@ class ModulesController extends AbstractController
     public function edit(Request $request, Modules $module, ModulesRepository $modulesRepository): Response
     {
         $form = $this->createForm(ModulesType::class, $module);
+        $module->setUser($this->security->getUser());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
