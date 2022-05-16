@@ -25,7 +25,9 @@
         "symfonycasts/verify-email-bundle": "^1.10"
     },
     "require-dev": {
-        "symfony/maker-bundle": "^1.42"
+        "symfony/maker-bundle": "^1.42",
+        "symfony/stopwatch": "6.0.*",
+        "symfony/web-profiler-bundle": "6.0.*"
     },
     "config": {
         "allow-plugins": {
