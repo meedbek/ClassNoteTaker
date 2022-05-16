@@ -21,6 +21,10 @@ class Modules
     #[ORM\OneToMany(mappedBy: 'module', targetEntity: Notes::class, orphanRemoval: true)]
     private $notes;
 
+    #[ORM\ManyToOne(targetEntity: Users::class, inversedBy: 'modules')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $user;
+
     public function __construct()
     {
         $this->notes = new ArrayCollection();
@@ -76,6 +80,18 @@ class Modules
     public function __toString(): string
     {
         return $this->name;
+    }
+
+    public function getUser(): ?Users
+    {
+        return $this->user;
+    }
+
+    public function setUser(?Users $user): self
+    {
+        $this->user = $user;
+
+        return $this;
     }
 
 }

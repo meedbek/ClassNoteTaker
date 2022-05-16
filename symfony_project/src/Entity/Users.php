@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UsersRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -25,6 +27,14 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string')]
     private $password;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Modules::class)]
+    private $modules;
+
+    public function __construct()
+    {
+        $this->modules = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -94,5 +104,35 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, Modules>
+     */
+    public function getModules(): Collection
+    {
+        return $this->modules;
+    }
+
+    public function addModule(Modules $module): self
+    {
+        if (!$this->modules->contains($module)) {
+            $this->modules[] = $module;
+            $module->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeModule(Modules $module): self
+    {
+        if ($this->modules->removeElement($module)) {
+            // set the owning side to null (unless already changed)
+            if ($module->getUser() === $this) {
+                $module->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }
