@@ -65,7 +65,7 @@ class NotesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $notesRepository->add($note, true);
 
-            return $this->redirectToRoute('app_notes_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_notes_module', ['id' => $note->getModule()->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('notes/edit.html.twig', [
