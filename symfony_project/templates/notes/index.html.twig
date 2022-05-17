@@ -23,8 +23,7 @@
                 <td>{{ note.createdAt ? note.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ note.updatedAt ? note.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_notes_show', {'id': note.id}) }}">show</a>
-                    <a href="{{ path('app_notes_edit', {'id': note.id}) }}">edit</a>
+                    <a href="{{ path('app_notes_edit', {'id': note.id}) }}">show</a>
                 </td>
             </tr>
         {% else %}
