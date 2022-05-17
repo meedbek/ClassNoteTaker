@@ -29,21 +29,23 @@ class NotesController extends AbstractController
     {
         return $this->render('notes/index.html.twig', [
             'notes' => $module->getNotes(),
+            'module' => $module
         ]);
     }
 
-    #[Route('/new', name: 'app_notes_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, NotesRepository $notesRepository): Response
+    #[Route('/new/{id}', name: 'app_notes_new', methods: ['GET', 'POST'])]
+    public function new(Modules $module,Request $request, NotesRepository $notesRepository): Response
     {
         $note = new Notes();
         $form = $this->createForm(NotesType::class, $note); 
+        $note->setModule($module);
         $note->setCreatedAt(new \DateTime('now'));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $notesRepository->add($note, true);
 
-            return $this->redirectToRoute('app_notes_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_notes_module', ['id' => $module->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('notes/new.html.twig', [
