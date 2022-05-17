@@ -21,7 +21,7 @@
                 Created at <span class="font-italic">{{ note.createdAt ? note.createdAt|date('Y-m-d H:i:s') : '' }}</span>
             </div>
             <div class="card-body">
-                <p class="card-text">{{ note.content }}</p>
+                <p class="card-text" style="height: 250px; overflow-x: scroll">{{ note.content }}</p>
                 <a href="{{ path('app_notes_edit', {'id': note.id}) }}" class="btn btn-secondary">show</a>
             </div>
             <div class="card-footer text-muted">
