@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modules index{% endblock %}
+{% block title %}Modules{% endblock %}
 
 {% block body %}
 
@@ -17,7 +17,7 @@
 
     {% for module in modules %}
 
-        <div class="card bg-light border-warning col-md-6" style="max-width: 18rem; margin: 1.5em">
+        <div class="card bg-light text-dark border-light col-md-6" style="max-width: 18rem; margin: 1.5em">
             <div class="card-header">{{ module.name}}</div>
             <div class="card-body">
                 <a href="{{ path('app_notes_module', {'id': module.id}) }}" class="btn btn-secondary">show</a>

@@ -1,38 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Notes index{% endblock %}
+{% block title %}Notes{% endblock %}
 
 {% block body %}
-    <h1>Notes index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Content</th>
-                <th>Created_at</th>
-                <th>Updated_at</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for note in notes %}
-            <tr>
-                <td>{{ note.id }}</td>
-                <td>{{ note.content }}</td>
-                <td>{{ note.createdAt ? note.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ note.updatedAt ? note.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_notes_edit', {'id': note.id}) }}">show</a>
-                </td>
-            </tr>
+    <br>
+    <h1>Your notes in {{ module.name }} :</h1>
+    <br>
+
+    <a href="{{ path('app_notes_new', {'id' : module.id}) }}" class="btn btn-secondary">Create new note</a>
+    <br>
+    <br>
+
+    <div class="container">
+    <div class="row">
+
+    {% for note in notes %}
+        <div class="card bg-light text-dark border-light col-md-6" style="max-width: 20rem; margin: 1.5em">
+            <div class="card-header">
+                Created at <span class="font-italic">{{ note.createdAt ? note.createdAt|date('Y-m-d H:i:s') : '' }}</span>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ note.content }}</p>
+                <a href="{{ path('app_notes_edit', {'id': note.id}) }}" class="btn btn-secondary">show</a>
+            </div>
+            <div class="card-footer text-muted">
+                Updated at <span class="font-italic">{{ note.updatedAt ? note.updatedAt|date('Y-m-d H:i:s') : '' }}</span>
+            </div>
+        </div>
+        <br> <hr> <br>
         {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
+            <p colspan="3" class="font-italic">no records found</p>
         {% endfor %}
-        </tbody>
-    </table>
 
-    <a href="{{ path('app_notes_new', {'id' : module.id}) }}">Create new</a>
+    
+    </div>
+    </div>
+
 {% endblock %}
