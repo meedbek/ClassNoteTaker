@@ -52,14 +52,6 @@ class ModulesController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_modules_show', methods: ['GET'])]
-    public function show(Modules $module): Response
-    {
-        return $this->render('modules/show.html.twig', [
-            'module' => $module,
-        ]);
-    }
-
     #[Route('/{id}/edit', name: 'app_modules_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Modules $module, ModulesRepository $modulesRepository): Response
     {

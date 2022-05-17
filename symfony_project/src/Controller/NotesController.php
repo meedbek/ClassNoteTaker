@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Modules;
 
 date_default_timezone_set('Asia/Kolkata');
 
@@ -20,6 +21,14 @@ class NotesController extends AbstractController
     {
         return $this->render('notes/index.html.twig', [
             'notes' => $notesRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/module/{id}', name: 'app_notes_module', methods: ['GET'])]
+    public function notes(Modules $module): Response
+    {
+        return $this->render('notes/index.html.twig', [
+            'notes' => $module->getNotes(),
         ]);
     }
 
