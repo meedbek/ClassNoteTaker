@@ -5,13 +5,13 @@
 
 {% block body %}
 
-    <div class="mx-auto" style="width: 500px; margin-top: 200px"> 
+    <div class="mx-auto" style="width: 500px; margin-top: 160px"> 
         <h3>Register</h3>
         <br>
         {{ form_start(registrationForm) }}
             <div class="form-group"> 
                     {{ form_row(registrationForm.username, {
-                    label: 'Username : ', 
+                    label: 'Email : ', 
                     'attr': {'class': 'form-control'}},
                     ) }}
             </div>

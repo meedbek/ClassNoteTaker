@@ -7,17 +7,19 @@
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    <form action="{{ path('login') }}" method="post" class="mx-auto" style="width: 500px; margin-top: 200px">
-    <div class="form-group">
-        <label for="username">Username : </label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" placeholder="Enter username">
-    </div>
-    <div class="form-group">
-        <label for="password">Password : </label>
-        <input type="password" id="password" name="_password" class="form-control" placeholder="Enter password">
-    </div>
-    <button type="submit" class="btn btn-primary">Login</button>
-    <a href={{ path('app_forgot_password_request') }} class="btn btn-secondary">Reset</a>
+    <form action="{{ path('login') }}" method="post" class="mx-auto" style="width: 500px; margin-top: 160px">
+        <h3>Login</h3>
+        <br>
+        <div class="form-group">
+            <label for="username">Email : </label>
+            <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" placeholder="Enter username">
+        </div>
+        <div class="form-group">
+            <label for="password">Password : </label>
+            <input type="password" id="password" name="_password" class="form-control" placeholder="Enter password">
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+        <a href={{ path('app_forgot_password_request') }} class="btn btn-secondary">Reset</a>
     </form>
     
 {% endblock %}
