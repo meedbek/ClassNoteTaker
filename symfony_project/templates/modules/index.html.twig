@@ -8,16 +8,17 @@
     <h1>Your modules :</h1>
     <br>
 
-    <a href="{{ path('app_modules_new') }} type="button" class="btn btn-secondary"">Create new</a>
+    <a href="{{ path('app_modules_new') }}" class="btn btn-secondary">Create new</a>
     <br>
-    
+    <br>
+
     {% for module in modules %}
 
         <div class="card bg-light mb-3" style="max-width: 18rem;">
             <div class="card-header">{{ module.name}}</div>
             <div class="card-body">
-                <a href="{{ path('app_modules_show', {'id': module.id}) }} type="button" class="btn btn-secondary" ">show</a>
-                <a href="{{ path('app_modules_edit', {'id': module.id}) }} type="button" class="btn btn-secondary"">edit</a> 
+                <a href="{{ path('app_modules_show', {'id': module.id}) }}" class="btn btn-secondary">show</a>
+                <a href="{{ path('app_modules_edit', {'id': module.id}) }}" class="btn btn-secondary">edit</a> 
             </div>
             </div>
 
