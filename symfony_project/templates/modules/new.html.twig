@@ -1,11 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Modules{% endblock %}
+{% block title %}Create Module{% endblock %}
 
 {% block body %}
-    <h1>Create new Modules</h1>
+
+    <h1>Create new Module :</h1>
 
     {{ include('modules/_form.html.twig') }}
+    
+    <br>
+    <a href="{{ path('app_modules_index') }}" class="btn btn-secondary">back to list</a>
 
-    <a href="{{ path('app_modules_index') }}">back to list</a>
 {% endblock %}

@@ -12,19 +12,25 @@
     <br>
     <br>
 
+    <div class="container">
+    <div class="row">
+
     {% for module in modules %}
 
-        <div class="card bg-light mb-3" style="max-width: 18rem;">
+        <div class="card bg-light border-warning col-md-6" style="max-width: 18rem; margin: 1.5em">
             <div class="card-header">{{ module.name}}</div>
             <div class="card-body">
                 <a href="{{ path('app_notes_module', {'id': module.id}) }}" class="btn btn-secondary">show</a>
                 <a href="{{ path('app_modules_edit', {'id': module.id}) }}" class="btn btn-secondary">edit</a> 
             </div>
-            </div>
+        </div>
 
         {% else %}
             <p colspan="3" class="font-italic">no records found</p>
         {% endfor %}
 
-    
+    </div>
+    </div>
+
+
 {% endblock %}

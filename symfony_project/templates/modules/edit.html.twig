@@ -1,13 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Modules{% endblock %}
+{% block title %}Edit Module{% endblock %}
 
 {% block body %}
-    <h1>Edit Modules</h1>
-
+    <h1>Edit Module : </h1>
+    
     {{ include('modules/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_modules_index') }}">back to list</a>
-
+    <br>
     {{ include('modules/_delete_form.html.twig') }}
+
+    <br>
+    <a href="{{ path('app_modules_index') }}" class="btn btn-secondary">back to list</a>
+    
 {% endblock %}
